@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Exercise - Test endpoint and review logs'
-    description: 'Exercise - Test endpoint and review logs'
-    duration: '6 minutes'
-    level: 300 <!-- 100 basic concepts, 200 foundations, 300 practical usage, 400 advanced scenarios, 500 expert design -->
-    islab: true <!-- if not a lab, remove -->
+  title: Exercise - Test endpoint and review logs
+  description: Exercise - Test endpoint and review logs
+  duration: 6 minutes
+  level: 300
+  islab: true
 ---
 
 This guided project consists of the following exercises:
