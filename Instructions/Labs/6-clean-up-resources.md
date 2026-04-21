@@ -1,10 +1,10 @@
 ---
 lab:
-    title: 'Clean up resources'
-    description: 'Clean up resources'
-    duration: '5 minutes'
-    level: 300 <!-- 100 basic concepts, 200 foundations, 300 practical usage, 400 advanced scenarios, 500 expert design -->
-    islab: true <!-- if not a lab, remove -->
+  title: Clean up resources
+  description: Clean up resources
+  duration: 5 minutes
+  level: 200
+  islab: true
 ---
 
 Complete these steps to avoid ongoing charges from the resources you created in this project.
