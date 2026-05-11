@@ -54,11 +54,12 @@ Confirm the deployed function appears in the Azure portal alongside the Function
 
 Before you review logs, confirm that your Function App is connected to Application Insights. In newer Azure portal experiences, monitoring is usually configured during Function App creation and can be verified from the app's monitoring settings.
 
-1.  In the Azure portal, search for **Function App** and open your Function App.
-2.  In the Function App menu, open the monitoring settings for **Application Insights**.
-3.  Confirm an Application Insights connection is present.
-4.  Note the connected Application Insights resource name and the linked Log Analytics workspace name (if shown). You use this information during cleanup.
-5.  If monitoring is not connected in your environment, enable or connect Application Insights from this page, apply the settings, and refresh the portal page.
+1.  In the Azure portal, in the portal search bar, search for **Function App** and select **Function App**.
+2.  Select the Function App you created in the first exercise.
+3.  In the left-hand menu, scroll down to the **Settings** section and select **Application Insights**.
+4.  Confirm the Application Insights status shows **Enabled** and a connected resource name is displayed.
+5.  Note the connected Application Insights resource name and the linked Log Analytics workspace name (if shown). You use this information during cleanup.
+6.  If monitoring is not connected in your environment, select **Turn on Application Insights**, configure the connection, select **Apply**, and select **Yes** when prompted to restart the Function App.
 
 > [!NOTE]
 > Azure portal labels and navigation can vary by subscription and experience. Focus on confirming that Application Insights is connected rather than matching exact button text.
@@ -123,11 +124,15 @@ Verify that the function now rejects all unauthenticated requests, then use a fu
 
 Use Application Insights to review records of your function invocations. The time spent in the previous tasks gave telemetry time to process.
 
-1.  In the portal search bar, open your **Application Insights** resource connected to the Function App.
-2.  Open **Transaction Search** (or the equivalent requests view in your portal experience).
-3.  Filter for recent requests to your function and confirm successful invocations (status **200**), including calls from Task 1 and Task 5.
-4.  Open an invocation entry to view details such as status code, duration, and timestamp.
-5.  For deeper analysis, open **Logs** and run queries against request/trace data for your Function App.
+1.  In the portal search bar, search for **Application Insights** and select **Application Insights**.
+2.  Select the Application Insights resource connected to your Function App (the name you noted in Task 3).
+3.  In the left-hand menu, under the **Investigate** section, select **Transaction search**.
+4.  In the **Transaction search** pane, set the time range to **Last 24 hours** (or a range that covers this exercise) and select **Search**.
+5.  Review the results and confirm successful invocations with a status of **200**, including calls from Task 1 and Task 5.
+6.  Select an invocation entry to view details such as status code, duration, and timestamp.
+7.  For deeper analysis, in the left-hand menu, under the **Monitoring** section, select **Logs**.
+8.  In the query editor, enter `requests | order by timestamp desc` and select **Run**.
+9.  Review the results to see detailed request data for your Function App.
 
 > [!NOTE]
 > The 401 Unauthorized responses may not appear as function executions. Azure rejects unauthorized requests at the host level before invoking the function.

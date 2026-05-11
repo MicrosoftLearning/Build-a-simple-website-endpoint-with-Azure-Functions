@@ -68,7 +68,8 @@ Confirm that your Function App deployed successfully and is running.
 
 1.  When deployment completes, select **Go to resource**.
 2.  Confirm the Function App Overview page shows a **Running** status.
-3.  In the Function App menu, open the monitoring settings and confirm an Application Insights connection is present.
+3.  In the left-hand menu, scroll down to the **Settings** section and select **Application Insights**.
+4.  Confirm the Application Insights status shows **Enabled** and a connected resource name is displayed.
 
 > [!NOTE]
 > **Validation step:** Confirm the Function App Overview page shows **Running** status and monitoring is connected.
