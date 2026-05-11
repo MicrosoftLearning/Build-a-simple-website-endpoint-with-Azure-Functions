@@ -14,7 +14,7 @@ Complete these steps to avoid ongoing charges from the resources you created in 
 
 ## Delete the resource group
 
-Deleting the resource group removes the Function App, its backing storage account, and the Application Insights resource.
+Deleting this resource group removes the Function App and its backing storage account.
 
 1.  In the portal search bar, search for **Resource groups** and select **Resource groups**.
 2.  Select **rg-gp-functions-endpoint** from the list.
@@ -23,15 +23,15 @@ Deleting the resource group removes the Function App, its backing storage accoun
 5.  In the confirmation dialog that appears, select **Delete** again to confirm.
 6.  Wait for the notification that confirms the resource group is deleted.
 
-## Delete the Application Insights resource group
+## Delete Application Insights resources
 
-When you enabled Application Insights, Azure created a Log Analytics workspace in a separate resource group named **DefaultResourceGroup-{region}** (for example, **DefaultResourceGroup-canadaeast**).
+Application Insights and its linked Log Analytics workspace might be in a different resource group than **rg-gp-functions-endpoint**. Use the monitoring resource names you noted earlier to identify exactly what this lab created.
 
 1.  In the portal search bar, search for **Resource groups** and select **Resource groups**.
-2.  Look for a resource group matching the **DefaultResourceGroup-{region}** pattern.
-3.  Open the resource group and check its contents.
-    - If the only resource is the Log Analytics workspace matching the name you noted earlier (check the last four characters), delete the resource group using the same steps as above.
-    - If the resource group contains other resources, delete only the Log Analytics workspace that matches your noted name. Select the workspace, select **Delete**, and confirm.
+2.  Locate the resource group that contains the Application Insights resource and/or Log Analytics workspace you noted in the monitoring steps.
+3.  Open that resource group and check its contents.
+    - If the resource group contains only monitoring resources created for this lab, delete the resource group using the same steps as above.
+    - If the resource group contains shared or unrelated resources, delete only the lab monitoring resources (the specific Application Insights resource and linked Log Analytics workspace) and leave all other resources intact.
 
 > [!WARNING]
 > Do not delete a Log Analytics workspace used by other services in your subscription—doing so would break monitoring for those services.
@@ -50,5 +50,5 @@ The function project folder you created in Cloud Shell persists across sessions 
 ## Verify cleanup
 
 1.  In the portal search bar, search for **Resource groups** and confirm **rg-gp-functions-endpoint** no longer appears in the list.
-2.  Confirm no additional resource groups created for this project remain in the list.
+2.  Confirm no additional monitoring resources created for this project remain.
 3.  Try browsing to the function endpoint URL you copied earlier. Confirm it no longer responds.

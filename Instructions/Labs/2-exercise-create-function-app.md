@@ -13,7 +13,7 @@ This guided project consists of the following exercises:
  - Deploy an HTTP-trigger function
  - Test endpoint and review logs
 
-In this exercise, you create a resource group and deploy a Function App using the serverless Flex Consumption plan. When you're done, you have a running Function App ready to host your first function.
+In this exercise, you create a resource group and deploy a Function App using the serverless Flex Consumption plan. You also confirm monitoring is connected so invocation telemetry is available in later exercises.
 
 This exercise includes the following tasks:
 
@@ -21,7 +21,7 @@ This exercise includes the following tasks:
  - Configure the Function App
  - Verify the deployment
 
-**Outcome:** A running Function App that uses the serverless consumption plan.
+**Outcome:** A running Function App that uses the serverless consumption plan with monitoring configured.
 
 > [!TIP]
 > Pause after each major action and confirm the page status before moving on. This habit prevents compounding mistakes.
@@ -51,10 +51,13 @@ Set up the Function App with serverless hosting. The Flex Consumption plan ensur
 8.  For **Runtime stack**, select **Node.js**.
 9.  For **Version**, keep the latest available LTS option.
 10. For **Instance size**, leave the default (**2048 MB**).
-11. Select **Review + create** and then select **Create**.
+11. Open the **Monitoring** tab.
+12. Confirm **Application Insights** is enabled. Use the default monitoring settings unless your environment requires a specific workspace.
+13. Note the Application Insights resource and/or Log Analytics workspace name shown in this step. You use this information during cleanup.
+14. Select **Review + create** and then select **Create**.
 
 > [!NOTE]
-> **Validation step:** Verify you selected all required settings before deployment: resource group, runtime stack (Node.js), region, and Flex Consumption hosting plan.
+> **Validation step:** Verify you selected all required settings before deployment: resource group, runtime stack (Node.js), region, Flex Consumption hosting plan, and monitoring enabled.
 
 > [!NOTE]
 > Each exercise includes validation steps like this one. Track your results as you go—you'll review them all in the validation unit at the end of this module.
@@ -65,6 +68,7 @@ Confirm that your Function App deployed successfully and is running.
 
 1.  When deployment completes, select **Go to resource**.
 2.  Confirm the Function App Overview page shows a **Running** status.
+3.  In the Function App menu, open the monitoring settings and confirm an Application Insights connection is present.
 
 > [!NOTE]
-> **Validation step:** Confirm the Function App Overview page shows **Running** status and note the resource URL.
+> **Validation step:** Confirm the Function App Overview page shows **Running** status and monitoring is connected.
