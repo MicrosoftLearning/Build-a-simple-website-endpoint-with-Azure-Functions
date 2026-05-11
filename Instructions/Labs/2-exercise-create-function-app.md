@@ -35,7 +35,7 @@ Set up your Azure environment before you begin. You create a resource group to o
 
 1.  Sign in to the [Azure portal](https://portal.azure.com) with an account that has permissions to create Function App resources.
 2.  In the portal search bar, search for **Resource groups** and select **Resource groups**.
-3.  Select **+ Create**. Name the resource group **rg-gp-functions-endpoint**, choose your preferred region, and select **Review + create** then **Create**.
+3.  Select **+ Create**. Name the resource group `**rg-gp-functions-endpoint**`, choose your preferred region, and select **Review + create** then **Create**.
 
 ## Task 2: Configure the Function App
 
@@ -45,7 +45,7 @@ Set up the Function App with serverless hosting. The Flex Consumption plan ensur
 2.  Select **Create**.
 3.  Select **Flex Consumption** as the hosting option and select **Select**.
 4.  On the Basics tab, select **rg-gp-functions-endpoint** as the resource group.
-5.  For **Function App name**, enter a globally unique name (for example, **func-gp-endpoint-** followed by your initials and a number).
+5.  For **Function App name**, enter a globally unique name (for example, `**func-gp-endpoint-**` followed by your initials and a number).
 6.  For **Secure unique default host name**, leave the default (**On**).
 7.  For **Region**, keep the default or choose your preferred region.
 8.  For **Runtime stack**, select **Node.js**.
