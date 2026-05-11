@@ -13,13 +13,13 @@ This guided project consists of the following exercises:
  - Deploy an HTTP-trigger function
  - **Test endpoint and review logs**
 
-In this exercise, you test your function endpoint, enable monitoring, secure the function with an access key, and review invocation logs. This walks you through the full lifecycle of deploying, securing, and monitoring a serverless function.
+In this exercise, you test your function endpoint, verify monitoring, secure the function with an access key, and review invocation logs. This walks you through the full lifecycle of deploying, securing, and monitoring a serverless function.
 
 This exercise includes the following tasks:
 
  - Test the HTTP endpoint in a browser
  - Verify the function in the portal
- - Enable Application Insights
+ - Verify monitoring connection
  - Restrict access to the function
  - Test restricted access
  - Review invocation logs
@@ -50,23 +50,22 @@ Confirm the deployed function appears in the Azure portal alongside the Function
 > [!NOTE]
 > **Validation step:** Confirm the **GetStatus** function appears in the Function App's function list in the portal.
 
-## Task 3: Enable Application Insights
+## Task 3: Verify monitoring connection
 
-When you created the Function App, you skipped past the Monitoring tab and accepted the defaults. Now that you want to track invocations, you need to enable Application Insights. This is a common pattern in Azure—you can add monitoring after the fact without recreating your resources.
+Before you review logs, confirm that your Function App is connected to Application Insights. In newer Azure portal experiences, monitoring is usually configured during Function App creation and can be verified from the app's monitoring settings.
 
-1.  Select **GetStatus** from the function list.
-2.  In the top menu, select **Invocations**.
-3.  The page displays a message that Application Insights is not configured. Select the **Configure Application Insights** button.
-4.  On the Application Insights configuration page, select **Turn on Application Insights**.
-5.  Before selecting **Apply**, note the **Log Analytics Workspace** name and location shown on the page. Write down the last four characters of the workspace name and the location—you need this information during cleanup.
-6.  Select **Apply**. When the **Apply monitoring settings** dialog appears noting the site will be restarted, select **Yes**. Wait for the configuration to complete.
-7.  Refresh the portal page (press **F5**) so the portal picks up the new Application Insights configuration.
-
-> [!NOTE]
-> Azure creates the Log Analytics workspace in a resource group named **DefaultResourceGroup-{region}**. This is separate from your project resource group and must be cleaned up separately.
+1.  In the Azure portal, in the portal search bar, search for **Function App** and select **Function App**.
+2.  Select the Function App you created in the first exercise.
+3.  In the left-hand menu, scroll down to the **Settings** section and select **Application Insights**.
+4.  Confirm the Application Insights status shows **Enabled** and a connected resource name is displayed.
+5.  Note the connected Application Insights resource name and the linked Log Analytics workspace name (if shown). You use this information during cleanup.
+6.  If monitoring is not connected in your environment, select **Turn on Application Insights**, configure the connection, select **Apply**, and select **Yes** when prompted to restart the Function App.
 
 > [!NOTE]
-> **Validation step:** Confirm Application Insights is now enabled. The Invocations page should no longer show the configuration prompt.
+> Azure portal labels and navigation can vary by subscription and experience. Focus on confirming that Application Insights is connected rather than matching exact button text.
+
+> [!NOTE]
+> **Validation step:** Confirm Application Insights is connected to the Function App and the linked monitoring resources are noted for cleanup.
 
 ## Task 4: Restrict access to the function
 
@@ -100,7 +99,7 @@ Now that monitoring is capturing data, change the authorization level so the fun
     func azure functionapp publish $FUNC_APP_NAME
     ```
 
-7.  Wait for the deployment to complete.
+6.  Wait for the deployment to complete.
 
 > [!NOTE]
 > **Validation step:** Confirm the deployment output shows the **GetStatus** function published successfully.
@@ -123,19 +122,23 @@ Verify that the function now rejects all unauthenticated requests, then use a fu
 
 ## Task 6: Review invocation logs
 
-Check Application Insights for records of your function invocations. The time spent in the previous tasks gave Application Insights time to process the data.
+Use Application Insights to review records of your function invocations. The time spent in the previous tasks gave telemetry time to process.
 
-1.  In the portal search bar, search for **Function App** and select **Function App**.
-2.  Select your Function App, then select **GetStatus** from the function list.
-3.  In the top menu, select **Invocations**.
-4.  Confirm the log shows your successful invocations (status **200**), including both the anonymous calls from Task 1 and the key-authenticated call from Task 5.
-5.  Select an invocation entry to view details such as the status code, duration, and timestamp.
+1.  In the portal search bar, search for **Application Insights** and select **Application Insights**.
+2.  Select the Application Insights resource connected to your Function App (the name you noted in Task 3).
+3.  In the left-hand menu, under the **Investigate** section, select **Transaction search**.
+4.  In the **Transaction search** pane, set the time range to **Last 24 hours** (or a range that covers this exercise) and select **Search**.
+5.  Review the results and confirm successful invocations with a status of **200**, including calls from Task 1 and Task 5.
+6.  Select an invocation entry to view details such as status code, duration, and timestamp.
+7.  For deeper analysis, in the left-hand menu, under the **Monitoring** section, select **Logs**.
+8.  In the query editor, enter `requests | order by timestamp desc` and select **Run**.
+9.  Review the results to see detailed request data for your Function App.
 
 > [!NOTE]
-> The 401 Unauthorized responses may not appear in the function Invocations tab. Azure rejects unauthorized requests at the host level before invocating the function, so they are not recorded as function executions.
+> The 401 Unauthorized responses may not appear as function executions. Azure rejects unauthorized requests at the host level before invoking the function.
 
 > [!NOTE]
-> **Validation step:** Confirm the invocation logs show your successful requests, demonstrating that Application Insights captures function activity.
+> **Validation step:** Confirm Application Insights shows your successful requests and details for at least one invocation.
 
 > [!TIP]
 > If invocation logs don't appear immediately, wait up to five minutes and select **Refresh**. Application Insights can take time to process new data.
